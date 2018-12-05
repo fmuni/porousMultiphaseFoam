@@ -17,7 +17,7 @@
     //-- Reading patch information
     word patchName = args.option("patch");
     label patchID = mesh.boundaryMesh().findPatchID(patchName);
-    fvPatchScalarField& hPatch = h.boundaryFieldRef()[patchID];
+    fvPatchScalarField& hPatch = h.boundaryField()[patchID];
     const vectorField& faces = mesh.boundary()[patchID].patch().faceCentres();
   
     //-- Compute and set up head pressure
@@ -49,7 +49,8 @@
     }  
     else
     {
-        scalar potential = args.optionLookupOrDefault<scalar>("value",0.);
+        scalar potential = 0.;
+        args.optionReadIfPresent("value",potential);
         Info << nl << "Uniform potential fixed = " << potential << " m " << endl;
         forAll(faces,facei)
         {

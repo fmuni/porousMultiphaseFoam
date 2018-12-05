@@ -16,7 +16,7 @@
     //-- Reading patch information
     word patchName = args.option("patch");
     label patchID = mesh.boundaryMesh().findPatchID(patchName);
-    fvPatchScalarField& potentialPatch = potential.boundaryFieldRef()[patchID];
+    fvPatchScalarField& potentialPatch = potential.boundaryField()[patchID];
     const vectorField& faces = mesh.boundary()[patchID].patch().faceCentres();
   
     //-- Compute and set up potential
